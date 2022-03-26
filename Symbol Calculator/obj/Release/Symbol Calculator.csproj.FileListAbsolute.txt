@@ -1,0 +1,9 @@
+D:\Symbol Calculator\Symbol Calculator\bin\Release\Symbol Calculator.exe.config
+D:\Symbol Calculator\Symbol Calculator\bin\Release\Symbol Calculator.exe
+D:\Symbol Calculator\Symbol Calculator\bin\Release\Symbol Calculator.pdb
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol Calculator.csprojResolveAssemblyReference.cache
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol_Calculator.Form1.resources
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol_Calculator.Properties.Resources.resources
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol Calculator.csproj.GenerateResource.Cache
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol Calculator.exe
+D:\Symbol Calculator\Symbol Calculator\obj\Release\Symbol Calculator.pdb
