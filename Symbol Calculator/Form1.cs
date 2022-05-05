@@ -45,6 +45,8 @@ namespace Symbol_Calculator
             /* 무토 콤보박스 설정 */
             cmb_ChewChew_Party.Enabled = false;
             cmb_ChewChew_Party.SelectedIndex = 2;
+
+            /* 비약 계산기 설정 */
         }
 
         /* 심볼 사용칸 체크 */
@@ -719,7 +721,7 @@ namespace Symbol_Calculator
             }
 
             /* 계산 */
-            if(dailySymbolAmount != 0 )
+            if (dailySymbolAmount != 0)
             {
                 double day = calFinDay(dailySymbolAmount, cmb_Chewchew_LV.SelectedIndex, EXP);
                 lbl_Chewchew_FinDay.Text = day + " 일";
@@ -938,6 +940,496 @@ namespace Symbol_Calculator
                 lbl_Arcs_FinDay.Text = "---- 일";
                 lbl_Arcs_Meso.Text = "----------- 메소";
                 lbl_Arcs_FinDate.Text = "----.--.--";
+            }
+        }
+
+        /* 레벨 별 경험치 */
+        long[] EXP = new long[100];
+
+        private void EXPCal()
+        {
+            EXP[0] = 2207026470;
+            EXP[10] = 9792413142;
+            EXP[15] = 19325244420;
+            EXP[20] = 43646655406;
+            EXP[25] = 74375420280;
+            EXP[30] = 144646061112;
+            EXP[35] = 211640540944;
+            EXP[40] = 381125269414;
+            EXP[45] = 557647802968;
+            EXP[50] = 1004220024186;
+            EXP[60] = 2902427248153;
+            EXP[70] = 6412170711400;
+            EXP[75] = 13478511721273;
+            EXP[80] = 39862455802452;
+            EXP[85] = 117892495511543;
+            EXP[90] = 348664933410464;
+            EXP[95] = 1031170264592643;
+            EXP[99] = 2058731433259209;
+
+            for (int Lv = 1; Lv <= 9; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.12);
+            }
+
+            for (int Lv = 11; Lv <= 14; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.11);
+            }
+
+            for (int Lv = 16; Lv <= 19; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.09);
+            }
+
+            for (int Lv = 21; Lv <= 24; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.07);
+            }
+
+            for (int Lv = 26; Lv <= 29; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.05);
+            }
+
+            for (int Lv = 31; Lv <= 49; Lv++)
+            {
+                if (Lv % 5 != 0)
+                    EXP[Lv] = (long)(EXP[Lv - 1] * 1.03);
+            }
+
+            for (int Lv = 51; Lv <= 59; Lv++)
+            {
+                EXP[Lv] = (long)(EXP[Lv - 1] * 1.03);
+            }
+
+            for (int Lv = 61; Lv <= 74; Lv++)
+            {
+                if (Lv % 10 != 0)
+                    EXP[Lv] = (long)(EXP[Lv - 1] * 1.01);
+            }
+
+            for (int Lv = 76; Lv <= 99; Lv++)
+            {
+                if (Lv % 5 != 0)
+                    EXP[Lv] = (long)(EXP[Lv - 1] * 1.10);
+            }
+
+            EXP[52] -= 1;
+            EXP[55] += 1;
+            EXP[59] += 4;
+        }
+
+        int curLevel = 200;         // 현재 레벨
+        double curPercentage = 0.000;  // 현재 경험치%
+
+        private void calResult(object sender, EventArgs e)
+        {
+            /* 현재 경험치 대강적으로 계산 */
+            long curEXP = (long)(EXP[curLevel - 200] / 100 * curPercentage);
+
+            /* 최종 계산 정보 */
+            int finLevel = curLevel;  // 최종 레벨
+            int tempLevel = curLevel; // 임시 저장용
+            long finEXP = curEXP;     // 최종 경험치
+            double finPercentage = curPercentage;     // 최종 경험치%
+
+            /* 성비 개수 */
+            int extremeCnt = Int32.Parse(txt_Extreme.Text);
+            int drink200Cnt = Int32.Parse(txt_200.Text);
+            int drink210Cnt = Int32.Parse(txt_210.Text);
+            int drink220Cnt = Int32.Parse(txt_220.Text);
+            int typhoonCnt = Int32.Parse(txt_Typhoon.Text);
+            int geukCnt = Int32.Parse(txt_Geuk.Text);
+
+            /* 익성비 경험치 계산 */
+            long extremeEXP = 571115568;
+            finEXP += extremeEXP * extremeCnt;
+
+            /* 성비1 경험치 계산 */
+            // 210레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 210 && drink200Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink200Cnt--;
+                }
+                else
+                    break;
+            }
+            // 210레벨 이상이면 209레벨 경험치만큼 획득
+            if (drink200Cnt > 0)
+                finEXP += EXP[9] * drink200Cnt;
+
+            /* 성비2 경험치 계산 */
+            // 220레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 219 && drink210Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink210Cnt--;
+                }
+                else
+                    break;
+            }
+            // 220레벨 이상이면 219레벨 경험치만큼 획득
+            if (drink210Cnt > 0)
+                finEXP += EXP[19] * drink210Cnt;
+
+            /* 성비3 경험치 계산 */
+            // 230레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 230 && drink220Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink220Cnt--;
+                }
+                else
+                    break;
+            }
+            // 230레벨 이상이면 229레벨 경험치만큼 획득
+            if (drink220Cnt > 0)
+                finEXP += EXP[29] * drink220Cnt;
+
+            /* 태성비 경험치 계산 */
+            // 240레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 240 && typhoonCnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    typhoonCnt--;
+                }
+                else
+                    break;
+            }
+            // 240레벨 이상이면 239레벨 경험치만큼 획득
+            if (typhoonCnt > 0)
+                finEXP += EXP[39] * typhoonCnt;
+
+            /* 극성비 경험치 계산 */
+            // 250레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 250 && geukCnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    geukCnt--;
+                }
+                else
+                    break;
+            }
+            // 250레벨 이상이면 249레벨 경험치만큼 획득
+            if (geukCnt > 0)
+                finEXP += EXP[49] * geukCnt;
+
+
+            /* 경험치(레벨업) 최종 계산 */
+            while (true)
+            {
+                if (finEXP >= EXP[finLevel - 200])
+                {
+                    finEXP -= EXP[finLevel - 200];
+                    finLevel++;
+                }
+                else
+                    break;
+            }
+            finPercentage = (double)(finEXP) / (double)(EXP[finLevel - 200]) * 100;
+
+            /* 최종 레벨 및 경험치% 출력 */
+            lbl_FinLV.Text = finLevel.ToString();
+            lbl_FinPercentage.Text = string.Format("{0:0.000}", Math.Truncate(double.Parse(finPercentage.ToString()) * 1000) / 1000);
+
+            curLevel = tempLevel;
+        }
+
+        private void calOptimalResult(object sender, EventArgs e)
+        {
+            /* 현재 경험치 대강적으로 계산 */
+            long curEXP = (long)(EXP[curLevel - 200] / 100 * curPercentage);
+
+            /* 최종 계산 정보 */
+            int finLevel = curLevel;  // 최종 레벨
+            int tempLevel = curLevel; // 임시 저장용
+            long finEXP = curEXP;     // 최종 경험치
+            double finPercentage = curPercentage;     // 최종 경험치%
+
+            /* 성비 개수 */
+            int drink200Cnt = 8;
+            int drink210Cnt = 4;
+            int drink220Cnt = 2;
+            int typhoonCnt = 1;
+
+            /* 성비1 경험치 계산 */
+            // 210레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 210 && drink200Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink200Cnt--;
+                }
+                else
+                    break;
+            }
+            // 210레벨 이상이면 209레벨 경험치만큼 획득
+            if (drink200Cnt > 0)
+                finEXP += EXP[9] * drink200Cnt;
+
+            /* 경험치(레벨업) 최종 계산 */
+            while (true)
+            {
+                if (finEXP >= EXP[finLevel - 200])
+                {
+                    finEXP -= EXP[finLevel - 200];
+                    finLevel++;
+                }
+                else
+                    break;
+            }
+
+
+            finPercentage = (double)(finEXP) / (double)(EXP[finLevel - 200]) * 100;
+
+            /* 최종 레벨 및 경험치% 출력 */
+            lbl_200Lv.Text = finLevel.ToString();
+            lbl_200Percentage.Text = string.Format("{0:0.000}", Math.Truncate(double.Parse(finPercentage.ToString()) * 1000) / 1000);
+
+
+            /* 최종 계산 정보 */
+            curLevel = tempLevel;
+            finLevel = tempLevel;  // 최종 레벨
+            finEXP = curEXP;     // 최종 경험치
+            finPercentage = curPercentage;     // 최종 경험치%
+
+
+            /* 성비2 경험치 계산 */
+            // 220레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 219 && drink210Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink210Cnt--;
+                }
+                else
+                    break;
+            }
+            // 220레벨 이상이면 219레벨 경험치만큼 획득
+            if (drink210Cnt > 0)
+                finEXP += EXP[19] * drink210Cnt;
+
+
+            /* 경험치(레벨업) 최종 계산 */
+            while (true)
+            {
+                if (finEXP >= EXP[finLevel - 200])
+                {
+                    finEXP -= EXP[finLevel - 200];
+                    finLevel++;
+                }
+                else
+                    break;
+            }
+
+            finPercentage = (double)(finEXP) / (double)(EXP[finLevel - 200]) * 100;
+
+            /* 최종 레벨 및 경험치% 출력 */
+            lbl_210Lv.Text = finLevel.ToString();
+            lbl_210Percentage.Text = string.Format("{0:0.000}", Math.Truncate(double.Parse(finPercentage.ToString()) * 1000) / 1000);
+
+            /* 최종 계산 정보 */
+            curLevel = tempLevel;
+            finLevel = tempLevel;  // 최종 레벨
+            finEXP = curEXP;     // 최종 경험치
+            finPercentage = curPercentage;     // 최종 경험치%
+
+
+            /* 성비3 경험치 계산 */
+            // 230레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 230 && drink220Cnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    drink220Cnt--;
+                }
+                else
+                    break;
+            }
+            // 230레벨 이상이면 229레벨 경험치만큼 획득
+            if (drink220Cnt > 0)
+                finEXP += EXP[29] * drink220Cnt;
+
+
+            /* 경험치(레벨업) 최종 계산 */
+            while (true)
+            {
+                if (finEXP >= EXP[finLevel - 200])
+                {
+                    finEXP -= EXP[finLevel - 200];
+                    finLevel++;
+                }
+                else
+                    break;
+            }
+
+            finPercentage = (double)(finEXP) / (double)(EXP[finLevel - 200]) * 100;
+
+            /* 최종 레벨 및 경험치% 출력 */
+            lbl_220Lv.Text = finLevel.ToString();
+            lbl_220Percentage.Text = string.Format("{0:0.000}", Math.Truncate(double.Parse(finPercentage.ToString()) * 1000) / 1000);
+
+            /* 최종 계산 정보 */
+            curLevel = tempLevel;
+            finLevel = tempLevel;  // 최종 레벨
+            finEXP = curEXP;     // 최종 경험치
+            finPercentage = curPercentage;     // 최종 경험치%
+
+
+            /* 태성비 경험치 계산 */
+            // 240레벨 미만이면 1업
+            while (true)
+            {
+                if (curLevel < 240 && typhoonCnt > 0)
+                {
+                    finEXP += EXP[curLevel - 200];
+                    curLevel++;
+                    typhoonCnt--;
+                }
+                else
+                    break;
+            }
+            // 240레벨 이상이면 239레벨 경험치만큼 획득
+            if (typhoonCnt > 0)
+                finEXP += EXP[39] * typhoonCnt;
+
+
+            /* 경험치(레벨업) 최종 계산 */
+            while (true)
+            {
+                if (finEXP >= EXP[finLevel - 200])
+                {
+                    finEXP -= EXP[finLevel - 200];
+                    finLevel++;
+                }
+                else
+                    break;
+            }
+
+            finPercentage = (double)(finEXP) / (double)(EXP[finLevel - 200]) * 100;
+
+            /* 최종 레벨 및 경험치% 출력 */
+            lbl_TyphoonLv.Text = finLevel.ToString();
+            lbl_TyphoonPercentage.Text = string.Format("{0:0.000}", Math.Truncate(double.Parse(finPercentage.ToString()) * 1000) / 1000);
+        }
+
+        private void btn_Calculate_Click(object sender, EventArgs e)
+        {
+            bool errorCalled = false;
+
+            /* 예외처리: 레벨 입력을 이상하게 한다면 */
+            int i;
+            if (int.TryParse(txt_curLevel.Text, out i))
+            {
+                txt_curLevel.Text = i.ToString();
+                curLevel = Int32.Parse(txt_curLevel.Text);
+
+                /* 300레벨 이상은 될 수 없음 */
+                if (curLevel >= 300)
+                {
+                    MessageBox.Show("메이플스토리의 만렙은 300입니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curLevel.Text = "299";
+                    txt_curLevel.Select(txt_Recheln_Party.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+                /* 200레벨 미만으로도 입력할 수 없음 */
+                else if (curLevel >= 100 && curLevel < 200)
+                {
+                    MessageBox.Show("200레벨 미만일 때는 경험치를 계산할 수 없습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curLevel.Text = "200";
+                    txt_curLevel.Select(txt_curLevel.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+            }
+            else
+            {
+                if (txt_curLevel.Text != "")
+                {
+                    MessageBox.Show("정수를 입력해주세요", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curLevel.Text = "200";
+                    txt_curLevel.Select(txt_curLevel.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+            }
+
+            /* 예외처리: 레벨 입력을 이상하게 한다면 */
+            double d;
+            if (double.TryParse(txt_curPercentage.Text, out d))
+            {
+                txt_curPercentage.Text = d.ToString();
+                curPercentage = double.Parse(txt_curPercentage.Text);
+
+                /* 100.000 초과가 될 수 없음 */
+                if (curPercentage > 100.000)
+                {
+
+                    MessageBox.Show("100.000 이하의 소수를 입력해주세요.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curPercentage.Text = "100.000";
+                    txt_curPercentage.Select(txt_curPercentage.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+                /* 0.000 미만으로도 입력할 수 없음 */
+                else if (curPercentage < 0.000)
+                {
+
+                    MessageBox.Show("음의 소수는 입력할 수 없습니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curPercentage.Text = "0.000";
+                    txt_curPercentage.Select(txt_curPercentage.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+            }
+            else
+            {
+                if (txt_curPercentage.Text != "")
+                {
+                    MessageBox.Show("소수를 입력해주세요", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_curPercentage.Text = "0.000";
+                    txt_curPercentage.Select(txt_curPercentage.Text.Length, 0); // 커서 끝으로 이동
+                    errorCalled = true;
+                }
+            }
+
+            if (txt_Extreme.Text == "")
+                txt_Extreme.Text = "0";
+            if (txt_200.Text == "")
+                txt_200.Text = "0";
+            if (txt_210.Text == "")
+                txt_210.Text = "0";
+            if (txt_220.Text == "")
+                txt_220.Text = "0";
+            if (txt_Typhoon.Text == "")
+                txt_Typhoon.Text = "0";
+            if (txt_Geuk.Text == "")
+                txt_Geuk.Text = "0";
+
+            if (errorCalled == false)
+            {
+                EXPCal();
+                calResult(sender, e);
+                calOptimalResult(sender, e);
             }
         }
     }

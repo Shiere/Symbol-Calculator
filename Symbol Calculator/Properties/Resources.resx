@@ -118,28 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="알카" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\알카.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="성비2001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\성비200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="모라스" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\모라스.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="여로" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\여로.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="레헬" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\레헬.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="츄츄" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\츄츄.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="에페" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\에페.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="성비200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\성비200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="세르니움" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\세르니움.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="여로" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\여로.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="에페" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\에페.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="츄츄" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\츄츄.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="성비220" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\성비220.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="알카" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\알카.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="성비210" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\성비210.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="레헬" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\레헬.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="모라스" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\모라스.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="아르크스" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\아르크스.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="극성비" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\극성비.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="태성비" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\태성비.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="익성비" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\익성비.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
